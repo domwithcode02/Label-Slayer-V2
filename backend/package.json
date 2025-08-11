@@ -1,0 +1,30 @@
+{
+  "name": "labelslayer-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "publish": "wrangler deploy",
+    "migrate": "wrangler d1 migrations apply LABELSLAYER_D1",
+    "check": "tsc --noEmit",
+    "build": "tsc --noEmit",
+    "lint": "echo \"No linter configured\"",
+    "test": "tsx ./tests/run-tests.ts",
+    "setup:resources": "chmod +x scripts/*.sh && ./scripts/setup-cloudflare-resources.sh",
+    "setup:secrets": "chmod +x scripts/*.sh && ./scripts/setup-secrets.sh",
+    "setup:verify": "chmod +x scripts/*.sh && ./scripts/verify-setup.sh",
+    "setup": "npm run setup:resources && npm run setup:secrets && npm run setup:verify",
+    "validate:phase3": "node scripts/validate-phase3.cjs",
+    "validate:phase4": "node validate-phase4.cjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240701.0",
+    "@types/glob": "^8.1.0",
+    "@types/node": "^20.11.30",
+    "glob": "^11.0.3",
+    "tsx": "^4.15.7",
+    "typescript": "^5.4.5",
+    "wrangler": "^4.28.1"
+  }
+}

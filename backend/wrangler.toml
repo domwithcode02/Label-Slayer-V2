@@ -1,0 +1,75 @@
+name = "labelslayer-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Bindings
+[[d1_databases]]
+binding = "LABELSLAYER_D1"
+database_name = "LABELSLAYER_D1"
+database_id = "c9f04706-9f46-4531-9507-33055edd6e31"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "LABELSLAYER_R2"
+bucket_name = "labelslyr-images-tmp"
+
+[[queues.producers]]
+binding = "ANALYSIS_QUEUE"
+queue = "analysis-jobs"
+
+[[queues.consumers]]
+queue = "analysis-jobs"
+max_batch_size = 1
+max_batch_timeout = 30
+
+[[queues.producers]]
+queue = "analysis-jobs-dlq"
+binding = "ANALYSIS_DLQ"
+
+# Vectorize binding (disabled for local dev - not yet supported)
+# [[vectorize]]
+# binding = "LABELSLAYER_VECTORIZE"
+# index_name = "labelslyr-index"
+
+[vars]
+# Non-secret environment variables (safe defaults for dev)
+API_VERSION = "0.1.0"
+SCHEMA_VERSION = "0003"
+ANALYSIS_QUEUE_NAME = "analysis-jobs"
+SIGNED_URL_TTL_SECONDS = "900"
+RATE_LIMIT_MAX_MINUTE = "120"
+LOG_SAMPLE_RATE = "0.1"
+MCP_CONTEXT7_ENDPOINT = ""
+MCP_SEQUENTIAL_ENDPOINT = ""
+OPENAI_BASE_URL = "https://api.openai.com/v1"
+VECTORIZE_DIMENSION = "1536"
+CORS_ALLOW_ORIGIN = "*"
+# Optional: app environment and API base URL for clarity/docs; not used by worker logic
+APP_ENV = "dev"
+API_BASE_URL = "http://127.0.0.1:8787"
+
+# Secrets to set with `wrangler secret put`
+# - OPENAI_API_KEY
+# - ETAG_SALT
+
+[dev]
+ip = "127.0.0.1"
+port = 8787
+local_protocol = "http"
+
+# Production overrides for non-secrets
+[env.production.vars]
+API_VERSION = "0.1.0"
+SCHEMA_VERSION = "0003"
+APP_ENV = "production"
+API_BASE_URL = "https://api.labelslayer.yourdomain.com"
+ANALYSIS_QUEUE_NAME = "analysis-jobs"
+SIGNED_URL_TTL_SECONDS = "900"
+RATE_LIMIT_MAX_MINUTE = "60"
+LOG_SAMPLE_RATE = "1.0"
+MCP_CONTEXT7_ENDPOINT = ""
+MCP_SEQUENTIAL_ENDPOINT = ""
+OPENAI_BASE_URL = "https://api.openai.com/v1"
+VECTORIZE_DIMENSION = "1536"
+CORS_ALLOW_ORIGIN = "https://labelslayer.yourdomain.com"

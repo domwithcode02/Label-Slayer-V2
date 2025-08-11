@@ -1,0 +1,40 @@
+# Development documentation and artifacts (root level)
+.claude/
+BACKEND_INTEGRATION_ANALYSIS.md
+DEPLOYMENT-CHECKLIST.md
+DEPLOYMENT-GUIDE.md
+DEPLOYMENT-PLAN.md
+DEPLOYMENT-SCRIPTS.md
+DevDocs/
+MONITORING-MAINTENANCE.md
+PHASE3-VALIDATION-GUIDE.md
+TESTING-GUIDE.md
+VALIDATION-SUMMARY.md
+crush.json
+deployment-verification-report.md
+deployment-verification.bat
+deployment-verification.sh
+development-phases/
+optiona
+quick-connectivity-test.js
+validate-phase3.js
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Logs
+*.log
